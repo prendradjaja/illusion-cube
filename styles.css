@@ -1,0 +1,26 @@
+#cube-container {
+  width: 1000px;
+  position: absolute;
+  top: 0;
+  left: 400px;
+}
+#cube2-container {
+  width: 1000px;
+  transform: rotate(60deg);
+  position: absolute;
+  top: 115px;
+  left: 198px;
+}
+#cube3-container {
+  width: 1000px;
+  transform: rotate(60deg);
+  position: absolute;
+  top: 115px;
+  left: -242px;
+}
+#cube4-container {
+  width: 1000px;
+  position: absolute;
+  top: 0px;
+  left: 830px;
+}
