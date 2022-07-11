@@ -1,0 +1,41 @@
+function illusionDemo() {
+  // return
+  makeMove(0, 'L'); makeMove(0, 'L'); makeMove(0, 'L');
+  makeMove(1, 'M');
+  makeMove(0, 'S');
+  makeMove(1, 'E');
+  makeMove(0, 'R'); makeMove(0, 'R'); makeMove(0, 'R');
+  makeMove(1, 'M');
+  makeMove(0, 'S'); makeMove(0, 'S'); makeMove(0, 'S');
+  makeMove(1, 'F');
+  makeMove(0, 'E');
+  makeMove(1, 'M');
+  makeMove(0, 'M'); makeMove(0, 'M'); makeMove(0, 'M');
+  makeMove(1, 'F'); makeMove(1, 'F'); makeMove(1, 'F');
+  makeMove(0, 'F');
+  makeMove(1, 'L');
+  makeMove(0, 'R'); makeMove(0, 'R'); makeMove(0, 'R');
+  makeMove(1, 'S');
+  makeMove(0, 'E'); makeMove(0, 'E'); makeMove(0, 'E');
+  makeMove(1, 'D');
+  makeMove(0, 'S'); makeMove(0, 'S'); makeMove(0, 'S');
+  makeMove(1, 'F');
+  makeMove(0, 'M'); makeMove(0, 'M'); makeMove(0, 'M');
+  makeMove(1, 'R'); makeMove(1, 'R'); makeMove(1, 'R');
+  makeMove(0, 'E');
+  makeMove(1, 'S');
+  makeMove(0, 'B');
+  makeMove(1, 'R');
+  makeMove(0, 'U'); makeMove(0, 'U'); makeMove(0, 'U');
+  makeMove(1, 'D');
+  makeMove(0, 'S'); makeMove(0, 'S'); makeMove(0, 'S');
+  makeMove(1, 'M'); makeMove(1, 'M'); makeMove(1, 'M');
+  makeMove(0, 'D'); makeMove(0, 'D'); makeMove(0, 'D');
+  makeMove(1, 'S');
+  makeMove(0, 'F'); makeMove(0, 'F'); makeMove(0, 'F');
+  makeMove(1, 'L');
+  makeMove(0, 'D'); makeMove(0, 'D'); makeMove(0, 'D');
+  makeMove(1, 'D'); makeMove(1, 'D'); makeMove(1, 'D');
+  makeMove(0, 'M'); makeMove(0, 'M'); makeMove(0, 'M');
+  makeMove(1, 'F'); makeMove(1, 'F'); makeMove(1, 'F');
+}

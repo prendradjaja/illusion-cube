@@ -25,6 +25,7 @@ function main() {
   // suneDemo();
   // moreDemosCube1();
   // moreDemosCube0();
+  // illusionDemo();
 }
 
 function drawCube() {
