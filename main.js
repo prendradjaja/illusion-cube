@@ -196,6 +196,7 @@ function setupPaintDevtool() {
 
 
 function makeMove(cubeId, moveName) {
+  // TODO Maybe store state outside of DOM
   const getColor = stickerId => stickers[stickerId].getAttribute('fill');
   const setColor = (stickerId, color) => stickers[stickerId].setAttribute('fill', color);
 
