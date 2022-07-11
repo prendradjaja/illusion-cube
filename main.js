@@ -2,7 +2,12 @@ const $ = s => document.querySelector(s);
 const $$ = s => document.querySelectorAll(s);
 
 let stickers;
+
+// Paint devtool state
 let activeColor;
+
+// Cycle-maker devtool state
+let cycles = [[]];
 
 function main() {
   drawCube();
@@ -11,6 +16,10 @@ function main() {
     .filter(path => path.getAttribute('fill') === '#eeeeee');
 
   setInitialColors();
+
+  setupControls();
+
+  setupCycleMakerDevtool();
   // setupPaintDevtool();
 }
 
@@ -28,6 +37,55 @@ function setInitialColors() {
   stickers[36].setAttribute('fill', 'white');
   stickers[37].setAttribute('fill', 'white');
   stickers[38].setAttribute('fill', 'white'); stickers[43].setAttribute('fill', 'white'); stickers[42].setAttribute('fill', 'white'); stickers[44].setAttribute('fill', 'white'); stickers[41].setAttribute('fill', 'white'); stickers[40].setAttribute('fill', 'white'); stickers[39].setAttribute('fill', 'white'); stickers[2].setAttribute('fill', 'green'); stickers[1].setAttribute('fill', 'green'); stickers[0].setAttribute('fill', 'green'); stickers[6].setAttribute('fill', 'green'); stickers[8].setAttribute('fill', 'green'); stickers[7].setAttribute('fill', 'green'); stickers[5].setAttribute('fill', 'green'); stickers[4].setAttribute('fill', 'green'); stickers[3].setAttribute('fill', 'green'); stickers[30].setAttribute('fill', 'red'); stickers[31].setAttribute('fill', 'red'); stickers[41].setAttribute('fill', 'red'); stickers[41].setAttribute('fill', 'white'); stickers[32].setAttribute('fill', 'red'); stickers[35].setAttribute('fill', 'red'); stickers[34].setAttribute('fill', 'red'); stickers[29].setAttribute('fill', 'red'); stickers[28].setAttribute('fill', 'red'); stickers[27].setAttribute('fill', 'red'); stickers[33].setAttribute('fill', 'red'); stickers[84].setAttribute('fill', 'yellow'); stickers[85].setAttribute('fill', 'yellow'); stickers[86].setAttribute('fill', 'yellow'); stickers[88].setAttribute('fill', 'yellow'); stickers[87].setAttribute('fill', 'yellow'); stickers[89].setAttribute('fill', 'yellow'); stickers[83].setAttribute('fill', 'yellow'); stickers[82].setAttribute('fill', 'yellow'); stickers[81].setAttribute('fill', 'yellow'); stickers[74].setAttribute('fill', 'blue'); stickers[73].setAttribute('fill', 'blue'); stickers[72].setAttribute('fill', 'blue'); stickers[80].setAttribute('fill', 'blue'); stickers[79].setAttribute('fill', 'blue'); stickers[78].setAttribute('fill', 'blue'); stickers[77].setAttribute('fill', 'blue'); stickers[76].setAttribute('fill', 'blue'); stickers[75].setAttribute('fill', 'blue'); stickers[90].setAttribute('fill', 'orange'); stickers[91].setAttribute('fill', 'orange'); stickers[92].setAttribute('fill', 'orange'); stickers[98].setAttribute('fill', 'orange'); stickers[97].setAttribute('fill', 'orange'); stickers[96].setAttribute('fill', 'orange'); stickers[93].setAttribute('fill', 'orange'); stickers[94].setAttribute('fill', 'orange'); stickers[95].setAttribute('fill', 'orange'); stickers[18].setAttribute('fill', 'orange'); stickers[20].setAttribute('fill', 'orange'); stickers[19].setAttribute('fill', 'orange'); stickers[25].setAttribute('fill', 'orange'); stickers[24].setAttribute('fill', 'orange'); stickers[26].setAttribute('fill', 'orange'); stickers[23].setAttribute('fill', 'orange'); stickers[22].setAttribute('fill', 'orange'); stickers[21].setAttribute('fill', 'orange'); stickers[12].setAttribute('fill', 'yellow'); stickers[13].setAttribute('fill', 'yellow'); stickers[14].setAttribute('fill', 'yellow'); stickers[17].setAttribute('fill', 'yellow'); stickers[16].setAttribute('fill', 'yellow'); stickers[15].setAttribute('fill', 'yellow'); stickers[9].setAttribute('fill', 'yellow'); stickers[10].setAttribute('fill', 'yellow'); stickers[11].setAttribute('fill', 'yellow'); stickers[65].setAttribute('fill', 'white'); stickers[64].setAttribute('fill', 'white'); stickers[63].setAttribute('fill', 'white'); stickers[69].setAttribute('fill', 'white'); stickers[70].setAttribute('fill', 'white'); stickers[71].setAttribute('fill', 'white'); stickers[68].setAttribute('fill', 'white'); stickers[67].setAttribute('fill', 'white'); stickers[66].setAttribute('fill', 'white'); stickers[59].setAttribute('fill', 'red'); stickers[58].setAttribute('fill', 'red'); stickers[57].setAttribute('fill', 'red'); stickers[60].setAttribute('fill', 'red'); stickers[61].setAttribute('fill', 'red'); stickers[62].setAttribute('fill', 'red'); stickers[56].setAttribute('fill', 'red'); stickers[55].setAttribute('fill', 'red'); stickers[54].setAttribute('fill', 'red'); stickers[47].setAttribute('fill', 'blue'); stickers[46].setAttribute('fill', 'blue'); stickers[53].setAttribute('fill', 'blue'); stickers[52].setAttribute('fill', 'blue'); stickers[50].setAttribute('fill', 'blue'); stickers[49].setAttribute('fill', 'blue'); stickers[48].setAttribute('fill', 'blue'); stickers[51].setAttribute('fill', 'blue'); stickers[45].setAttribute('fill', 'blue');
+}
+
+function setupControls() {
+  const cubeIdAttr = 'data-cube-id';
+  const moveAttr = 'data-move';
+
+  const buttons = Array.from($$('#controls button'))
+    .filter(button => button.getAttribute(cubeIdAttr) && button.getAttribute(moveAttr));
+  console.log(buttons.length);
+
+  for (let button of buttons) {
+    const cubeId = +button.getAttribute(cubeIdAttr);
+    const moveName = button.getAttribute(moveAttr);
+
+    button.addEventListener('click', () => {
+      makeMove(cubeId, moveName);
+    });
+
+    if (!moveDefinitions[cubeId][moveName]) {
+      button.setAttribute('disabled', 'disabled');
+    }
+  }
+}
+
+function setupCycleMakerDevtool() {
+  $('#cycle-maker-devtool').style.display = 'block';
+  updateCycles();
+
+  for (let i = 0; i < stickers.length; i++) {
+    stickers[i].addEventListener('click', () => {
+      stickers[i].style.opacity = '0.3';
+      cycles.at(-1).push(i);
+      updateCycles();
+    });
+  }
+}
+
+function nextCycle() {
+  cycles.push([]);
+  updateCycles();
+}
+
+function resetCycles() {
+  cycles = [[]];
+  updateCycles();
+}
+
+function updateCycles() {
+  $('#console').innerHTML = JSON.stringify(cycles, null, 2);
 }
 
 function setupPaintDevtool() {
