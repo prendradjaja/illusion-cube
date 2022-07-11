@@ -1,3 +1,22 @@
 #svg-container {
   width: 1000px;
 }
+
+#controls {
+  display: flex;
+  margin: 0 auto; /* center vertically */
+  width: max-content; /* set width so centering works */
+}
+
+#left-cube-controls {
+  margin-right: 10px;
+}
+
+#controls button {
+  font-family: monospace;
+  font-size: 30px;
+}
+
+button.spacer {
+  visibility: hidden;
+}
