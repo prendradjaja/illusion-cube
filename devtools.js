@@ -21,15 +21,16 @@ function setupCycleMakerDevtool() {
       updateCycles();
     });
   }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === ' ') {
+      nextCycle();
+    }
+  });
 }
 
 function nextCycle() {
   cycles.push([]);
-  updateCycles();
-}
-
-function resetCycles() {
-  cycles = [[]];
   updateCycles();
 }
 
@@ -50,7 +51,6 @@ function setupPaintDevtool() {
   updateSwatchColor();
 
   document.addEventListener('keydown', e => {
-    console.log(e.key);
     if (e.key === 'a') {
       activeColor = 'white';
     } else if (e.key === 'o') {
