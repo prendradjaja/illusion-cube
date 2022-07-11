@@ -45,7 +45,6 @@ function setupControls() {
 
   const buttons = Array.from($$('#controls button'))
     .filter(button => button.getAttribute(cubeIdAttr) && button.getAttribute(moveAttr));
-  console.log(buttons.length);
 
   for (let button of buttons) {
     const cubeId = +button.getAttribute(cubeIdAttr);
