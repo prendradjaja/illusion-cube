@@ -2,6 +2,11 @@
 
 <div id="svg-container"></div>
 
+<div id="paint-devtool" style="display: none">
+  Active color:
+  <div id="swatch" style="width: 40px; height: 40px; background-color: gray; border: 1px solid black;"></div>
+</div>
+
 <div id="controls">
   <div id="left-cube-controls">
     <button class="spacer">.</button>
@@ -36,5 +41,7 @@
     <button  data-cube-id="1" data-move="S">S</button>
   </div>
 </div>
+
+<pre id="console"></pre>
 
 <script src="./main.js"></script>
