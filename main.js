@@ -60,10 +60,6 @@ function setupControls() {
     button.addEventListener('click', () => {
       makeMove(cubeId, moveName);
     });
-
-    if (!moveDefinitions[cubeId][moveName]) {
-      button.setAttribute('disabled', 'disabled');
-    }
   }
 }
 
