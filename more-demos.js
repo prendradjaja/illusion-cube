@@ -1,68 +1,59 @@
-function moreDemosCube0() {
-
-  // R D R' D'
-  makeMove(0, 'R');
-  makeMove(0, 'D');
-  makeMove(0, 'R'); makeMove(0, 'R'); makeMove(0, 'R');
-  makeMove(0, 'D'); makeMove(0, 'D'); makeMove(0, 'D');
-
-}
-
-function moreDemosCube1() {
+function moreDemos(cubeId) {
+  const n = cubeId;
 
   // // F R U R' U' F'
-  // makeMove(1, 'F');
-  // makeMove(1, 'R');
-  // makeMove(1, 'U');
-  // makeMove(1, 'R'); makeMove(1, 'R'); makeMove(1, 'R');
-  // makeMove(1, 'U'); makeMove(1, 'U'); makeMove(1, 'U');
-  // makeMove(1, 'F'); makeMove(1, 'F'); makeMove(1, 'F');
-
-  // // F R U R' U' F'
-  // makeMove(1, 'F');
-  // makeMove(1, 'R');
-  // makeMove(1, 'U');
-  // makeMove(1, 'R'); makeMove(1, 'R'); makeMove(1, 'R');
-  // makeMove(1, 'U'); makeMove(1, 'U'); makeMove(1, 'U');
-  // makeMove(1, 'F'); makeMove(1, 'F'); makeMove(1, 'F');
+  // makeMove(n, 'F');
+  // makeMove(n, 'R');
+  // makeMove(n, 'U');
+  // makeMove(n, 'R'); makeMove(n, 'R'); makeMove(n, 'R');
+  // makeMove(n, 'U'); makeMove(n, 'U'); makeMove(n, 'U');
+  // makeMove(n, 'F'); makeMove(n, 'F'); makeMove(n, 'F');
 
   // // Lefty sune (L' U' L U' L' U2 L)
-  // makeMove(1, 'L'); makeMove(1, 'L'); makeMove(1, 'L');
-  // makeMove(1, 'U'); makeMove(1, 'U'); makeMove(1, 'U');
-  // makeMove(1, 'L');
-  // makeMove(1, 'U'); makeMove(1, 'U'); makeMove(1, 'U');
-  // makeMove(1, 'L'); makeMove(1, 'L'); makeMove(1, 'L');
-  // makeMove(1, 'U'); makeMove(1, 'U');
-  // makeMove(1, 'L');
+  // makeMove(n, 'L'); makeMove(n, 'L'); makeMove(n, 'L');
+  // makeMove(n, 'U'); makeMove(n, 'U'); makeMove(n, 'U');
+  // makeMove(n, 'L');
+  // makeMove(n, 'U'); makeMove(n, 'U'); makeMove(n, 'U');
+  // makeMove(n, 'L'); makeMove(n, 'L'); makeMove(n, 'L');
+  // makeMove(n, 'U'); makeMove(n, 'U');
+  // makeMove(n, 'L');
 
   // // R D R' D'
-  // makeMove(1, 'R');
-  // makeMove(1, 'D');
-  // makeMove(1, 'R'); makeMove(1, 'R'); makeMove(1, 'R');
-  // makeMove(1, 'D'); makeMove(1, 'D'); makeMove(1, 'D');
+  // makeMove(n, 'R');
+  // makeMove(n, 'D');
+  // makeMove(n, 'R'); makeMove(n, 'R'); makeMove(n, 'R');
+  // makeMove(n, 'D'); makeMove(n, 'D'); makeMove(n, 'D');
 
   // // L B D B' D' L'
-  // makeMove(1, 'L');
-  // makeMove(1, 'B');
-  // makeMove(1, 'D');
-  // makeMove(1, 'B'); makeMove(1, 'B'); makeMove(1, 'B');
-  // makeMove(1, 'D'); makeMove(1, 'D'); makeMove(1, 'D');
-  // makeMove(1, 'L'); makeMove(1, 'L'); makeMove(1, 'L');
+  // makeMove(n, 'L');
+  // makeMove(n, 'B');
+  // makeMove(n, 'D');
+  // makeMove(n, 'B'); makeMove(n, 'B'); makeMove(n, 'B');
+  // makeMove(n, 'D'); makeMove(n, 'D'); makeMove(n, 'D');
+  // makeMove(n, 'L'); makeMove(n, 'L'); makeMove(n, 'L');
 
   // // MU U perm
   // // M2 U M U2 M' U M2
-  // makeMove(1, 'M'); makeMove(1, 'M');
-  // makeMove(1, 'U');
-  // makeMove(1, 'M');
-  // makeMove(1, 'U'); makeMove(1, 'U');
-  // makeMove(1, 'M'); makeMove(1, 'M'); makeMove(1, 'M');
-  // makeMove(1, 'U');
-  // makeMove(1, 'M'); makeMove(1, 'M');
+  // makeMove(n, 'M'); makeMove(n, 'M');
+  // makeMove(n, 'U');
+  // makeMove(n, 'M');
+  // makeMove(n, 'U'); makeMove(n, 'U');
+  // makeMove(n, 'M'); makeMove(n, 'M'); makeMove(n, 'M');
+  // makeMove(n, 'U');
+  // makeMove(n, 'M'); makeMove(n, 'M');
 
   // // E S E' S'
-  // makeMove(1, 'E');
-  // makeMove(1, 'S');
-  // makeMove(1, 'E'); makeMove(1, 'E'); makeMove(1, 'E');
-  // makeMove(1, 'S'); makeMove(1, 'S'); makeMove(1, 'S');
+  // makeMove(n, 'E');
+  // makeMove(n, 'S');
+  // makeMove(n, 'E'); makeMove(n, 'E'); makeMove(n, 'E');
+  // makeMove(n, 'S'); makeMove(n, 'S'); makeMove(n, 'S');
 
+}
+
+function moreDemosCube0() {
+  moreDemos(0);
+}
+
+function moreDemosCube1() {
+  moreDemos(1);
 }
