@@ -1,5 +1,8 @@
 #svg-container {
   width: 1000px;
+  margin: 0 auto; /* center vertically */
+  margin-bottom: -60px; /* TODO Just crop the svg */
+  margin-top: -60px; /* TODO Just crop the svg */
 }
 
 #controls {
