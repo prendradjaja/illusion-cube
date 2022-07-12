@@ -22,6 +22,7 @@ body {
 #controls button {
   font-family: monospace;
   font-size: 30px;
+  outline: 0;
 }
 
 button.spacer {

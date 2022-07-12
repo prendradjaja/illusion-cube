@@ -6,6 +6,8 @@ const $$ = s => document.querySelectorAll(s);
 let stickers;
 let strokes;
 
+let isShiftPressed = false;
+
 function main() {
   drawCube();
 
@@ -47,20 +49,52 @@ function fadeBacks() {
 }
 
 function setupControls() {
-  function handleClick(cubeId, primaryMove, mouseButton) {
-    console.log(mouseButton);
+  function handleClick(cubeId, primaryMove, mouseButton, isReverseMove) {
+    let move;
     if (mouseButton === 0) {
-      makeMove(cubeId, primaryMove);
+      move = primaryMove;
     } else if (mouseButton === 2) {
-      const move = {
+      move = {
         U: 'D',
         D: 'U',
         R: 'L',
         F: 'B',
       }[primaryMove] ?? primaryMove;
+    }
+
+    if (!isReverseMove) {
+      makeMove(cubeId, move);
+    } else {
+      makeMove(cubeId, move);
+      makeMove(cubeId, move);
       makeMove(cubeId, move);
     }
   }
+
+  function handleShiftDown() {
+    isShiftPressed = true;
+    updateButtons();
+  }
+
+  function handleShiftUp() {
+    isShiftPressed = false;
+    updateButtons();
+  }
+
+  function updateButtons() {
+    const buttons = Array.from($$('#controls button'))
+      .filter(button => button.getAttribute(cubeIdAttr) && button.getAttribute(moveAttr));
+
+    for (let button of buttons) {
+      const primaryMove = button.getAttribute(moveAttr);
+      const innerHTML = primaryMove +
+        (
+          isShiftPressed ? "'" : '&nbsp;'
+        );
+      button.innerHTML = innerHTML;
+    }
+  }
+
 
   const cubeIdAttr = 'data-cube-id';
   const moveAttr = 'data-move';
@@ -73,13 +107,25 @@ function setupControls() {
     const primaryMove = button.getAttribute(moveAttr);
 
     button.addEventListener('mousedown', () => {
-      handleClick(cubeId, primaryMove, event.button);
+      handleClick(cubeId, primaryMove, event.button, isShiftPressed);
     });
 
     button.addEventListener('contextmenu', () => {
       event.preventDefault();
     });
   }
+
+  document.addEventListener('keydown', () => {
+    if (event.key === 'Shift') {
+      handleShiftDown();
+    }
+  });
+
+  document.addEventListener('keyup', () => {
+    if (event.key === 'Shift') {
+      handleShiftUp();
+    }
+  });
 }
 
 function suneDemo() {
