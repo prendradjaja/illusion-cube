@@ -29,7 +29,7 @@ function main() {
 
   setupControls();
 
-  scramble();
+  // scramble();
 
   // setupCycleMakerDevtool();
   // setupPaintDevtool();
