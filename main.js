@@ -47,6 +47,21 @@ function fadeBacks() {
 }
 
 function setupControls() {
+  function handleClick(cubeId, primaryMove, mouseButton) {
+    console.log(mouseButton);
+    if (mouseButton === 0) {
+      makeMove(cubeId, primaryMove);
+    } else if (mouseButton === 2) {
+      const move = {
+        U: 'D',
+        D: 'U',
+        R: 'L',
+        F: 'B',
+      }[primaryMove] ?? primaryMove;
+      makeMove(cubeId, move);
+    }
+  }
+
   const cubeIdAttr = 'data-cube-id';
   const moveAttr = 'data-move';
 
@@ -55,10 +70,14 @@ function setupControls() {
 
   for (let button of buttons) {
     const cubeId = +button.getAttribute(cubeIdAttr);
-    const moveName = button.getAttribute(moveAttr);
+    const primaryMove = button.getAttribute(moveAttr);
 
-    button.addEventListener('click', () => {
-      makeMove(cubeId, moveName);
+    button.addEventListener('mousedown', () => {
+      handleClick(cubeId, primaryMove, event.button);
+    });
+
+    button.addEventListener('contextmenu', () => {
+      event.preventDefault();
     });
   }
 }
