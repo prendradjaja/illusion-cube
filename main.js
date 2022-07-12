@@ -87,11 +87,11 @@ function setupControls() {
 
     for (let button of buttons) {
       const primaryMove = button.getAttribute(moveAttr);
-      const innerHTML = primaryMove +
+      const text = primaryMove +
         (
-          isShiftPressed ? "'" : '&nbsp;'
+          isShiftPressed ? "'" : ''
         );
-      button.innerHTML = innerHTML;
+      button.textContent = text;
     }
   }
 
