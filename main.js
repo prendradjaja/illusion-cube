@@ -8,6 +8,14 @@ let strokes;
 
 let isShiftPressed = false;
 
+const oppositeFaceMoves = {
+  U: 'D',
+  D: 'U',
+  R: 'L',
+  F: 'B',
+};
+
+
 function main() {
   drawCube();
 
@@ -20,6 +28,8 @@ function main() {
   fadeBacks();
 
   setupControls();
+
+  scramble();
 
   // setupCycleMakerDevtool();
   // setupPaintDevtool();
@@ -49,24 +59,6 @@ function fadeBacks() {
 }
 
 function setupControls() {
-  function handleClick(cubeId, primaryMove, mouseButton, isOppositeFaceMove) {
-    const isReverseMove = mouseButton === 2;
-    let move;
-    if (!isOppositeFaceMove) {
-      move = primaryMove;
-    } else if (isOppositeFaceMove) {
-      move = oppositeFaceMoves[primaryMove] ?? primaryMove; // Could DRY this expression. Repeated in updateButtons()
-    }
-
-    if (!isReverseMove) {
-      makeMove(cubeId, move);
-    } else {
-      makeMove(cubeId, move);
-      makeMove(cubeId, move);
-      makeMove(cubeId, move);
-    }
-  }
-
   function handleShiftDown() {
     isShiftPressed = true;
     updateButtons();
@@ -92,13 +84,6 @@ function setupControls() {
   }
 
 
-  const oppositeFaceMoves = {
-    U: 'D',
-    D: 'U',
-    R: 'L',
-    F: 'B',
-  };
-
   const cubeIdAttr = 'data-cube-id';
   const moveAttr = 'data-move';
 
@@ -110,7 +95,11 @@ function setupControls() {
     const primaryMove = button.getAttribute(moveAttr);
 
     button.addEventListener('mousedown', () => {
-      handleClick(cubeId, primaryMove, event.button, isShiftPressed);
+      if (event.button !== 1) {
+        handleClick(cubeId, primaryMove, event.button, isShiftPressed);
+      } else {
+        handleClick(cubeId, primaryMove, 0, true);
+      }
     });
 
     button.addEventListener('contextmenu', () => {
@@ -129,6 +118,56 @@ function setupControls() {
       handleShiftUp();
     }
   });
+}
+
+/**
+ * @param cubeId 0 or 1
+ * @param primaryMove Any of 'U' | 'F' | 'R' | 'D' | 'B' | 'L' | 'M' | 'E' | 'S'
+ * @param mouseButton 0 or 2
+ * @param isOppositeFaceMove Turns U into U' etc. Ignored for slice moves.
+ */
+function handleClick(cubeId, primaryMove, mouseButton, isOppositeFaceMove) {
+  const isReverseMove = mouseButton === 2;
+  let move;
+  if (!isOppositeFaceMove) {
+    move = primaryMove;
+  } else if (isOppositeFaceMove) {
+    move = oppositeFaceMoves[primaryMove] ?? primaryMove; // Could DRY this expression. Repeated in updateButtons()
+  }
+
+  if (!isReverseMove) {
+    makeMove(cubeId, move);
+  } else {
+    makeMove(cubeId, move);
+    makeMove(cubeId, move);
+    makeMove(cubeId, move);
+  }
+}
+
+function scramble() {
+  const n = getRandomInt(500, 600);
+  for (let i = 0; i < n; i++) {
+    let cubeId = getRandomInt(0, 1);
+    let primaryMove = 'UFRDBLMES'[getRandomInt(0, 8)];
+    let mouseButton = [0, 2][getRandomInt(0, 1)];
+    let isOppositeFaceMove = !!getRandomInt(0, 1);
+    handleClick(cubeId, primaryMove, mouseButton, isOppositeFaceMove);
+  }
+}
+
+/**
+ * Returns a random integer between min (inclusive) and max (inclusive).
+ * The value is no lower than min (or the next integer greater than min
+ * if min isn't an integer) and no greater than max (or the next integer
+ * lower than max if max isn't an integer).
+ * Using Math.round() will give you a non-uniform distribution!
+ *
+ * From https://stackoverflow.com/a/1527820/1945088
+ */
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 function suneDemo() {
