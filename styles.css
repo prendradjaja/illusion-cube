@@ -1,12 +1,27 @@
 body {
   background: #acc;
+  overflow-x: hidden;
+}
+
+/* TODO This (outer container with auto margin and inner container with
+ * negative margin) is a really bad way of doing "center even if content
+ * overflows". Here are some better ways to do that:
+ * https://stackoverflow.com/questions/14562457/center-oversized-image-in-div */
+#svg-outer-container {
+  margin: 0 auto;
+  width: 400px;
 }
 
 #svg-container {
   width: 1000px;
-  margin: 0 auto; /* center vertically */
-  margin-bottom: -60px; /* TODO Just crop the svg */
-  margin-top: -60px; /* TODO Just crop the svg */
+
+  /* "Crop" vertically. TODO Just crop it at the source */
+  margin-bottom: -60px;
+  margin-top: -60px;
+
+  /* "Crop" horizontally and center */
+  margin-left: -300px;
+  margin-right: -300px;
 }
 
 #controls {
