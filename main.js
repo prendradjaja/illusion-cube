@@ -49,17 +49,13 @@ function fadeBacks() {
 }
 
 function setupControls() {
-  function handleClick(cubeId, primaryMove, mouseButton, isReverseMove) {
+  function handleClick(cubeId, primaryMove, mouseButton, isOppositeFaceMove) {
+    const isReverseMove = mouseButton === 2;
     let move;
-    if (mouseButton === 0) {
+    if (!isOppositeFaceMove) {
       move = primaryMove;
-    } else if (mouseButton === 2) {
-      move = {
-        U: 'D',
-        D: 'U',
-        R: 'L',
-        F: 'B',
-      }[primaryMove] ?? primaryMove;
+    } else if (isOppositeFaceMove) {
+      move = oppositeFaceMoves[primaryMove] ?? primaryMove; // Could DRY this expression. Repeated in updateButtons()
     }
 
     if (!isReverseMove) {
@@ -87,14 +83,21 @@ function setupControls() {
 
     for (let button of buttons) {
       const primaryMove = button.getAttribute(moveAttr);
-      const text = primaryMove +
-        (
-          isShiftPressed ? "'" : ''
-        );
+      const text =
+        isShiftPressed ?
+        (oppositeFaceMoves[primaryMove] ?? primaryMove) :
+        primaryMove;
       button.textContent = text;
     }
   }
 
+
+  const oppositeFaceMoves = {
+    U: 'D',
+    D: 'U',
+    R: 'L',
+    F: 'B',
+  };
 
   const cubeIdAttr = 'data-cube-id';
   const moveAttr = 'data-move';
