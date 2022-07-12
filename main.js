@@ -15,6 +15,8 @@ const oppositeFaceMoves = {
   F: 'B',
 };
 
+const backStickerIds = [84, 85, 86, 88, 87, 89, 83, 82, 81, 74, 73, 72, 80, 79, 78, 77, 76, 75, 90, 91, 92, 98, 97, 96, 93, 94, 95, 65, 64, 63, 69, 70, 71, 68, 67, 66, 59, 58, 57, 60, 61, 62, 56, 55, 54, 47, 46, 53, 52, 50, 49, 48, 51, 45];
+
 
 function main() {
   drawCube();
@@ -25,15 +27,19 @@ function main() {
     .filter(path => path.getAttribute('stroke') === '#595959');
 
   setInitialColors();
-  fadeBacks();
-
   setupControls();
 
-  // scramble();
+  const isBacksVisible = window.location.href.includes('showBacks=true');
+  if (isBacksVisible) {
+    fadeBacks();
+  } else {
+    hideBacks();
+  }
+
+  // Devtools etc -- try these out by uncommenting them (one at a time)!
 
   // setupCycleMakerDevtool();
   // setupPaintDevtool();
-
   // suneDemo();
   // moreDemosCube1();
   // moreDemosCube0();
@@ -50,11 +56,16 @@ function setInitialColors() {
 }
 
 function fadeBacks() {
-  const stickerIds = [84, 85, 86, 88, 87, 89, 83, 82, 81, 74, 73, 72, 80, 79, 78, 77, 76, 75, 90, 91, 92, 98, 97, 96, 93, 94, 95, 65, 64, 63, 69, 70, 71, 68, 67, 66, 59, 58, 57, 60, 61, 62, 56, 55, 54, 47, 46, 53, 52, 50, 49, 48, 51, 45];
-
-  for (let id of stickerIds) {
+  for (let id of backStickerIds) {
     stickers[id].setAttribute('opacity', '40%');
     strokes[id].setAttribute('opacity', '40%');
+  }
+}
+
+function hideBacks() {
+  for (let id of backStickerIds) {
+    stickers[id].setAttribute('opacity', '0%');
+    strokes[id].setAttribute('opacity', '0%');
   }
 }
 
