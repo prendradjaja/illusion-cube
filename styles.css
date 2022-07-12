@@ -46,6 +46,18 @@ button.spacer {
 
 #scramble {
   display: block;
-  margin: 40px auto;
+  margin: 40px auto 0;
   font-size: 20px;
+}
+
+#instructions {
+  text-align: center;
+  margin-top: 40px;
+  font-family: monospace;
+  font-size: 20px;
+}
+
+#instructions p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
 }
